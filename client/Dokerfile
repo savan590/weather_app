@@ -1,7 +1,7 @@
 # Dockerfile for Frontend
 FROM node:14
 
-# Set working directory
+# Set working director
 WORKDIR /usr/src/app
 
 # Copy package.json and install dependencies
@@ -20,8 +20,6 @@ RUN npm install -g serve
 # Expose the port for the frontend
 EXPOSE 3000
 
-# Command to serve the React app
-CMD ["serve", "-s", "build"]
 
 # Command to start the frontend
 CMD ["npm", "start"]
