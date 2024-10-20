@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  backend:
+    build: ./node
+    container_name: weather_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URL=mongodb+srv://savan9443:savan123@cluster0.wa8csvb.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      - API_KEY=c978001c012c231bf42264627e681e9b
+
+    depends_on:
+      - mongo
+    networks:
+      - weather_network
+
+  frontend:
+    build: ./client
+    container_name: weather_frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - weather_network
+
+  mongo:
+    image: mongo:latest
+    container_name: weather_mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - weather_network
+    volumes:
+      - mongo_data:/data/db
+
+networks:
+  weather_network:
+
+volumes:
+  mongo_data:
